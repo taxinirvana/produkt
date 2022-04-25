@@ -25,8 +25,25 @@ class ProductRepositoryTest {
     }
 
     @Test
+    public void shouldSaveAllProductOneElement() {
+        repository.save(one);
+
+        Product[] expected = new Product[]{one};
+        Product[] actual = repository.findAll();
+        assertArrayEquals(expected, actual);
+    }
+
+    @Test
+    public void shouldSaveAllProductNoElement() {
+
+        Product[] expected = new Product[0];
+        Product[] actual = repository.findAll();
+        assertArrayEquals(expected, actual);
+    }
+
+    @Test
     public void shouldRemoveItem() {
-        int id = 3;
+       int id = 3;
         repository.save(one);
         repository.save(two);
         repository.save(three);
@@ -36,4 +53,14 @@ class ProductRepositoryTest {
         Product[] actual = repository.removeById(3);
         assertArrayEquals(expected, actual);
     }
+
+    @Test
+    public void shouldRemoveItemOneElement() {
+        repository.save(two);
+
+        Product[] expected = new Product[0];
+        Product[] actual = repository.removeById(2);
+        assertArrayEquals(expected, actual);
+    }
+
 }

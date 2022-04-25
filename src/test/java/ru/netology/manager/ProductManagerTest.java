@@ -31,10 +31,52 @@ class ProductManagerTest {
     }
 
     @Test
+    public void shouldUseSearchByOneElement() {
+        manager.add(one);
+        manager.searchBy("Secret");
+
+        Product[] expected = new Product[]{one};
+        Product[] actual = manager.searchBy("Secret");
+
+        assertArrayEquals(expected, actual);
+    }
+
+    @Test
+    public void shouldUseSearchByNoElement() {
+        manager.searchBy("Secret");
+
+        Product[] expected = new Product[0];
+        Product[] actual = manager.searchBy("Secret");
+
+        assertArrayEquals(expected, actual);
+    }
+
+    @Test
     public void shouldUseSearchByNoText() {
         manager.add(one);
         manager.add(two);
         manager.add(three);
+        manager.searchBy("New Phone");
+
+        Product[] expected = new Product[0];
+        Product[] actual = manager.searchBy("New Phone");
+
+        assertArrayEquals(expected, actual);
+    }
+
+    @Test
+    public void shouldUseSearchByNoTextOneElement() {
+        manager.add(three);
+        manager.searchBy("New Phone");
+
+        Product[] expected = new Product[0];
+        Product[] actual = manager.searchBy("New Phone");
+
+        assertArrayEquals(expected, actual);
+    }
+
+    @Test
+    public void shouldUseSearchByNoTextNoElement() {
         manager.searchBy("New Phone");
 
         Product[] expected = new Product[0];
